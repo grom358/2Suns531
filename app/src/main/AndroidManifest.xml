@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cameronzemek.workout">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.cameronzemek.workout.MainActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.cameronzemek.workout.WorkoutActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:launchMode="singleTask" />
+        <activity
+            android:name="com.cameronzemek.workout.SetupActivity"
+            android:launchMode="singleTask" android:label="@string/activity_setup"/>
+        <activity
+            android:name="com.cameronzemek.workout.StopwatchActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:launchMode="singleTask" />
+        <activity
+            android:name="com.cameronzemek.workout.HistoryActivity"
+            android:launchMode="singleTask" android:label="@string/activity_history"/>
+        <activity android:name="com.cameronzemek.workout.HistoryItemActivity" android:label="@string/activity_history"></activity>
+    </application>
+
+</manifest>

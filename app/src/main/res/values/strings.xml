@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">2_Suns 5/3/1 LP</string>
+    <string name="activity_history">2_Suns 5/3/1 LP: History</string>
+    <string name="activity_setup">2_Suns 5/3/1 LP: Setup</string>
+    <string name="bench">Bench</string>
+    <string name="press">OHP</string>
+    <string name="deadlift">Deadlift</string>
+    <string name="squat">Squat</string>
+
+    <string name="week">Week</string>
+
+    <string-array name="day">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+
+    <string name="workout_key">com.cameronzemek.workout.SESSION</string>
+
+    <!-- Preferences -->
+    <string name="preference_file_key">com.cameronzemek.workout.SETTINGS</string>
+</resources>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.cameronzemek.workout.MainActivity"
+    android:orientation="vertical">
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Label"
+            android:text="Week"
+            android:id="@+id/lblWeek"
+            android:layout_gravity="right" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/ReadOnlyValue"
+            android:text="1"
+            android:id="@+id/txtWeek"
+            android:layout_marginLeft="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Label"
+            android:text="Day"
+            android:id="@+id/lblDay"
+            android:layout_gravity="right" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/ReadOnlyValue"
+            android:text="Monday"
+            android:id="@+id/txtDay"
+            android:layout_marginLeft="24sp" />
+    </GridLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Workout"
+        android:id="@+id/btnWorkout"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32sp"
+        style="@style/LargeButton"
+        android:onClick="onWorkout" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Stopwatch"
+        android:id="@+id/btnStopwatch"
+        android:layout_gravity="center_horizontal"
+        style="@style/LargeButton"
+        android:layout_marginTop="12sp"
+        android:onClick="onStopwatch" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Setup"
+        android:id="@+id/btnSetup"
+        android:layout_gravity="center_horizontal"
+        style="@style/LargeButton"
+        android:layout_marginTop="12sp"
+        android:onClick="onSetup" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="History"
+        android:id="@+id/btnHistory"
+        android:layout_gravity="center_horizontal"
+        style="@style/LargeButton"
+        android:layout_marginTop="12sp"
+        android:onClick="onHistory" />
+
+</LinearLayout>
