@@ -116,6 +116,15 @@
                 android:hint="weight"
                 android:selectAllOnFocus="true" />
 
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerVariation"
+                grid:layout_columnSpan="2"
+                android:entries="@array/variations"
+                android:padding="0dp"
+                android:textSize="@dimen/text_size_large"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

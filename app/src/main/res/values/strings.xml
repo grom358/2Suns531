@@ -24,6 +24,13 @@
         <item>lb</item>
     </string-array>
 
+    <string-array name="variations">
+        <item>4 Day</item>
+        <item>5 Day</item>
+        <item>6 Day (Squat)</item>
+        <item>6 Day (Deadlift)</item>
+    </string-array>
+
     <string name="workout_key">com.cameronzemek.workout.SESSION</string>
 
     <!-- Preferences -->

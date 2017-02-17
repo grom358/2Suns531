@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -17,6 +18,7 @@ public class SetupActivity extends AppCompatActivity {
     private EditText editWeek;
     private Spinner spinnerDay;
     private Spinner spinnerUnit;
+    private Spinner spinnerVariation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +34,20 @@ public class SetupActivity extends AppCompatActivity {
         spinnerDay = (Spinner) findViewById(R.id.spinnerDay);
         spinnerDay.setAdapter(ArrayAdapter.createFromResource(this, R.array.day, R.layout.spinner_item));
 
+        spinnerVariation = (Spinner) findViewById(R.id.spinnerVariation);
+        spinnerVariation.setAdapter(ArrayAdapter.createFromResource(this, R.array.variations, R.layout.spinner_item));
+
         spinnerUnit = (Spinner) findViewById(R.id.spinnerUnit);
         spinnerUnit.setAdapter(ArrayAdapter.createFromResource(this, R.array.units, R.layout.spinner_item));
 
         SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         spinnerUnit.setSelection(sharedPref.getString("unit", "kg").equals("kg") ? 0 : 1);
-        editPressWeight.setText(String.format("%.2f", sharedPref.getFloat("press_weight", 100)));
-        editBenchWeight.setText(String.format("%.2f", sharedPref.getFloat("bench_weight", 100)));
-        editSquatWeight.setText(String.format("%.2f", sharedPref.getFloat("squat_weight", 100)));
-        editDeadliftWeight.setText(String.format("%.2f", sharedPref.getFloat("deadlift_weight", 100)));
+        editPressWeight.setText(Util.format(sharedPref.getFloat("press_weight", 100)));
+        editBenchWeight.setText(Util.format(sharedPref.getFloat("bench_weight", 100)));
+        editSquatWeight.setText(Util.format(sharedPref.getFloat("squat_weight", 100)));
+        editDeadliftWeight.setText(Util.format(sharedPref.getFloat("deadlift_weight", 100)));
+        spinnerVariation.setSelection(sharedPref.getInt("variation", WorkoutProgram.VARIATION_6DAY_SQUAT));
         editWeek.setText(Integer.toString(sharedPref.getInt("week", 1)));
         spinnerDay.setSelection(sharedPref.getInt("day_no", 0));
     }
@@ -56,7 +62,24 @@ public class SetupActivity extends AppCompatActivity {
         editor.putFloat("squat_weight", Float.valueOf(editSquatWeight.getText().toString()));
         editor.putFloat("deadlift_weight", Float.valueOf(editDeadliftWeight.getText().toString()));
         editor.putInt("week", Integer.valueOf(editWeek.getText().toString()));
-        editor.putInt("day_no", spinnerDay.getSelectedItemPosition());
+
+        int variation = spinnerVariation.getSelectedItemPosition();
+        editor.putInt("variation", variation);
+
+        int dayNo = spinnerDay.getSelectedItemPosition();
+        // Sanitize day.
+        switch (variation) {
+            case WorkoutProgram.VARIATION_4DAY:
+                if (dayNo == WorkoutProgram.WEDNESDAY) {
+                    // 4 day program does not have saturday.
+                    dayNo = WorkoutProgram.THURSDAY;
+                }
+            case WorkoutProgram.VARIATION_5DAY:
+                if (dayNo > WorkoutProgram.FRIDAY) {
+                    dayNo = WorkoutProgram.MONDAY;
+                }
+        }
+        editor.putInt("day_no", dayNo);
         editor.commit();
     }
 
