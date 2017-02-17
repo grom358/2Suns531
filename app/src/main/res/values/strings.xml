@@ -8,6 +8,7 @@
     <string name="squat">Squat</string>
 
     <string name="week">Week</string>
+    <string name="unit">Unit</string>
 
     <string-array name="day">
         <item>Monday</item>
@@ -16,6 +17,11 @@
         <item>Thursday</item>
         <item>Friday</item>
         <item>Saturday</item>
+    </string-array>
+
+    <string-array name="units">
+        <item>kg</item>
+        <item>lb</item>
     </string-array>
 
     <string name="workout_key">com.cameronzemek.workout.SESSION</string>

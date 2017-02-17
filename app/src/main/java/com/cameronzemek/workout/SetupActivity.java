@@ -16,6 +16,7 @@ public class SetupActivity extends AppCompatActivity {
     private EditText editDeadliftWeight;
     private EditText editWeek;
     private Spinner spinnerDay;
+    private Spinner spinnerUnit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +32,12 @@ public class SetupActivity extends AppCompatActivity {
         spinnerDay = (Spinner) findViewById(R.id.spinnerDay);
         spinnerDay.setAdapter(ArrayAdapter.createFromResource(this, R.array.day, R.layout.spinner_item));
 
+        spinnerUnit = (Spinner) findViewById(R.id.spinnerUnit);
+        spinnerUnit.setAdapter(ArrayAdapter.createFromResource(this, R.array.units, R.layout.spinner_item));
 
         SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        spinnerUnit.setSelection(sharedPref.getString("unit", "kg").equals("kg") ? 0 : 1);
         editPressWeight.setText(String.format("%.2f", sharedPref.getFloat("press_weight", 100)));
         editBenchWeight.setText(String.format("%.2f", sharedPref.getFloat("bench_weight", 100)));
         editSquatWeight.setText(String.format("%.2f", sharedPref.getFloat("squat_weight", 100)));
@@ -46,6 +50,7 @@ public class SetupActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("unit", spinnerUnit.getSelectedItemPosition() == 1 ? "lb" : "kg");
         editor.putFloat("press_weight", Float.valueOf(editPressWeight.getText().toString()));
         editor.putFloat("bench_weight", Float.valueOf(editBenchWeight.getText().toString()));
         editor.putFloat("squat_weight", Float.valueOf(editSquatWeight.getText().toString()));

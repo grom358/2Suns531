@@ -8,28 +8,33 @@ public class ExerciseSet {
 
     private int reps;
     private float weight;
+    private String unit;
     protected int state = STATE_TODO;
     private boolean amrap = false;
 
     public ExerciseSet() {
         this.reps = 0;
         this.weight = 0f;
+        this.unit = "";
     }
 
-    public ExerciseSet(int reps, float weight) {
+    public ExerciseSet(int reps, float weight, String unit) {
         this.reps = reps;
         this.weight = weight;
+        this.unit = unit;
     }
 
-    public ExerciseSet(int reps, float weight, boolean amrap) {
+    public ExerciseSet(int reps, float weight, String unit, boolean amrap) {
         this.reps = reps;
         this.weight = weight;
         this.amrap = amrap;
+        this.unit = unit;
     }
 
-    public ExerciseSet(int reps, float weight, int state) {
+    public ExerciseSet(int reps, float weight, String unit, int state) {
         this.reps = reps;
         this.weight = weight;
+        this.unit = unit;
         this.state = state;
     }
 
@@ -57,7 +62,11 @@ public class ExerciseSet {
         this.weight = weight;
     }
 
+    public String getUnit() {
+        return unit;
+    }
+
     public String getDetails() {
-        return String.format("%d%s x %.2fkg", reps, amrap ? "+" : "", weight);
+        return String.format("%d%s x %s%s", reps, amrap ? "+" : "", Util.format(weight), unit);
     }
 }

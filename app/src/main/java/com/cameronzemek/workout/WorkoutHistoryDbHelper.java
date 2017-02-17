@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 public class WorkoutHistoryDbHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "WorkoutHistory.db";
 
     public WorkoutHistoryDbHelper(Context ctx) {
@@ -41,6 +41,7 @@ public class WorkoutHistoryDbHelper extends SQLiteOpenHelper {
                         "workout_exercise_id INTEGER, " +
                         "reps INTEGER, " +
                         "weight NUMERIC, " +
+                        "unit STRING, " +
                         "state INTEGER, " +
                         "FOREIGN KEY(workout_exercise_id) REFERENCES workout_exercise(workout_exercise_id));"
         );
@@ -53,7 +54,9 @@ public class WorkoutHistoryDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        if (oldVersion == 1 && newVersion == 2) {
+            db.execSQL("ALTER TABLE workout_exercise_set ADD COLUMN unit TEXT DEFAULT 'kg'");
+        }
     }
 
     public void insert(List<Exercise> workout) {
@@ -98,6 +101,7 @@ public class WorkoutHistoryDbHelper extends SQLiteOpenHelper {
         values.put("workout_exercise_id", exerciseId);
         values.put("reps", set.getReps());
         values.put("weight", set.getWeight());
+        values.put("unit", set.getUnit());
         values.put("state", set.getState());
         return db.insert("workout_exercise_set", null, values);
     }
@@ -133,9 +137,9 @@ public class WorkoutHistoryDbHelper extends SQLiteOpenHelper {
 
     private void addSets(SQLiteDatabase db, long exerciseId, List<ExerciseSet> sets) {
         String[] args = {Long.toString(exerciseId)};
-        Cursor c = db.rawQuery("SELECT reps, weight, state FROM workout_exercise_set WHERE workout_exercise_id = ?", args);
+        Cursor c = db.rawQuery("SELECT reps, weight, unit, state FROM workout_exercise_set WHERE workout_exercise_id = ?", args);
         while (c.moveToNext()) {
-            sets.add(new ExerciseSet(c.getInt(0), c.getFloat(1), c.getInt(2)));
+            sets.add(new ExerciseSet(c.getInt(0), c.getFloat(1), c.getString(2), c.getInt(3)));
         }
     }
 }
