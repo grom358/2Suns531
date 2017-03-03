@@ -268,11 +268,19 @@ public class WorkoutProgram {
                     case MONDAY:
                         return buildBenchPress(sharedPref, plateRound, unit);
                     case TUESDAY:
-                        return buildSquat(sharedPref, plateRound, unit);
+                        if (variation == VARIATION_6DAY_DEADLIFT) {
+                            return buildDeadlift(sharedPref, plateRound, unit);
+                        } else {
+                            return buildSquat(sharedPref, plateRound, unit);
+                        }
                     case WEDNESDAY:
                         return buildPress(sharedPref, plateRound, unit);
                     case THURSDAY:
-                        return buildDeadlift(sharedPref, plateRound, unit);
+                        if (variation == VARIATION_6DAY_DEADLIFT) {
+                            return buildSquat(sharedPref, plateRound, unit);
+                        } else {
+                            return buildDeadlift(sharedPref, plateRound, unit);
+                        }
                     case FRIDAY:
                         return buildBench(sharedPref, plateRound, unit);
                     case SATURDAY:
