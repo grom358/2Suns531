@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -107,12 +108,20 @@ public class WorkoutHistoryDbHelper extends SQLiteOpenHelper {
     }
 
     public List<WorkoutHistory> getHistoryList() {
+        DateFormat isoDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        DateFormat displayDateFormat = new SimpleDateFormat("EEEE, yyyy-MM-dd HH:mm");
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery("SELECT workout_id, workout_date FROM workout_history ORDER BY workout_date DESC", null);
         int numRows = c.getCount();
         List<WorkoutHistory> historyList = new ArrayList<>(numRows);
         while (c.moveToNext()) {
-            historyList.add(new WorkoutHistory(c.getLong(0), c.getString(1)));
+            String strDate = c.getString(1);
+            try {
+                strDate = displayDateFormat.format(isoDateFormat.parse(strDate));
+            } catch (ParseException e) {
+                // Just display the string stored in database.
+            }
+            historyList.add(new WorkoutHistory(c.getLong(0), strDate));
         }
         return historyList;
     }
