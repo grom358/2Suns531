@@ -9,6 +9,7 @@
 
     <string name="week">Week</string>
     <string name="unit">Unit</string>
+    <string name="round">Round</string>
 
     <string-array name="day">
         <item>Monday</item>

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 public class SetupActivity extends AppCompatActivity {
+    private EditText editRound;
     private EditText editPressWeight;
     private EditText editBenchWeight;
     private EditText editSquatWeight;
@@ -25,6 +26,10 @@ public class SetupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
 
+        final SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
+        editRound = (EditText) findViewById(R.id.editRound);
         editPressWeight = (EditText) findViewById(R.id.editPressWeight);
         editBenchWeight = (EditText) findViewById(R.id.editBenchWeight);
         editSquatWeight = (EditText) findViewById(R.id.editSquatWeight);
@@ -39,10 +44,26 @@ public class SetupActivity extends AppCompatActivity {
 
         spinnerUnit = (Spinner) findViewById(R.id.spinnerUnit);
         spinnerUnit.setAdapter(ArrayAdapter.createFromResource(this, R.array.units, R.layout.spinner_item));
+        spinnerUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                boolean isMetric = position != 1;
+                String roundKey = isMetric ? "kg_round" : "lb_round";
+                float defaultRound = isMetric ? 2.5f : 5f;
+                editRound.setText(Util.format(sharedPref.getFloat(roundKey, defaultRound)));
+            }
 
-        SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        spinnerUnit.setSelection(sharedPref.getString("unit", "kg").equals("kg") ? 0 : 1);
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        boolean isMetric = sharedPref.getString("unit", "kg").equals("kg");
+        spinnerUnit.setSelection(isMetric ? 0 : 1);
+        String roundKey = isMetric ? "kg_round" : "lb_round";
+        float defaultRound = isMetric ? 2.5f : 5f;
+        editRound.setText(Util.format(sharedPref.getFloat(roundKey, defaultRound)));
         editPressWeight.setText(Util.format(sharedPref.getFloat("press_weight", 100)));
         editBenchWeight.setText(Util.format(sharedPref.getFloat("bench_weight", 100)));
         editSquatWeight.setText(Util.format(sharedPref.getFloat("squat_weight", 100)));
@@ -56,7 +77,10 @@ public class SetupActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("unit", spinnerUnit.getSelectedItemPosition() == 1 ? "lb" : "kg");
+        boolean isMetric = spinnerUnit.getSelectedItemPosition() != 1;
+        editor.putString("unit", isMetric ? "kg" : "lb");
+        String roundKey = isMetric ? "kg_round" : "lb_round";
+        editor.putFloat(roundKey, Float.valueOf(editRound.getText().toString()));
         editor.putFloat("press_weight", Float.valueOf(editPressWeight.getText().toString()));
         editor.putFloat("bench_weight", Float.valueOf(editBenchWeight.getText().toString()));
         editor.putFloat("squat_weight", Float.valueOf(editSquatWeight.getText().toString()));

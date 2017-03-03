@@ -246,7 +246,10 @@ public class WorkoutProgram {
         int variation = sharedPref.getInt("variation", VARIATION_6DAY_SQUAT);
 
         String unit = sharedPref.getString("unit", "kg");
-        float plateRound = unit.equals("kg") ? KG_PLATE_ROUND : POUND_PLATE_ROUND;
+        boolean isMetric = sharedPref.getString("unit", "kg").equals("kg");
+        String roundKey = isMetric ? "kg_round" : "lb_round";
+        float defaultRound = isMetric ? KG_PLATE_ROUND : POUND_PLATE_ROUND;
+        float plateRound = sharedPref.getFloat(roundKey, defaultRound);
 
         switch (variation) {
             case VARIATION_4DAY:

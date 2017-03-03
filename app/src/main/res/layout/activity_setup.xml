@@ -29,6 +29,40 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             grid:columnCount="2">
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerVariation"
+                grid:layout_columnSpan="2"
+                android:entries="@array/variations"
+                android:padding="0dp"
+                android:textSize="@dimen/text_size_large"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/week"
+                android:id="@+id/lblWeek"
+                android:layout_marginRight="10sp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"
+                android:ems="6"
+                android:id="@+id/editWeek"
+                android:hint="@string/week"
+                android:selectAllOnFocus="true" />
+
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerDay"
+                grid:layout_columnSpan="2"
+                android:entries="@array/day"
+                android:padding="0dp"
+                android:textSize="@dimen/text_size_large"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -46,6 +80,24 @@
                 android:entries="@array/units"
                 android:padding="0dp"
                 android:textSize="@dimen/text_size_large"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/round"
+                android:id="@+id/lblRound"
+                android:layout_marginRight="50sp"
+                grid:layout_gravity="fill_horizontal"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editRound"
+                android:hint="weight"
+                android:selectAllOnFocus="true" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -115,41 +167,6 @@
                 android:id="@+id/editPressWeight"
                 android:hint="weight"
                 android:selectAllOnFocus="true" />
-
-            <Spinner
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinnerVariation"
-                grid:layout_columnSpan="2"
-                android:entries="@array/variations"
-                android:padding="0dp"
-                android:textSize="@dimen/text_size_large"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/week"
-                android:id="@+id/lblWeek"
-                android:layout_marginRight="10sp" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="numberSigned"
-                android:ems="6"
-                android:id="@+id/editWeek"
-                android:hint="@string/week"
-                android:selectAllOnFocus="true" />
-
-            <Spinner
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinnerDay"
-                grid:layout_columnSpan="2"
-                android:entries="@array/day"
-                android:padding="0dp"
-                android:textSize="@dimen/text_size_large"/>
 
         </android.support.v7.widget.GridLayout>
     </ScrollView>
