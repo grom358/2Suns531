@@ -56,6 +56,28 @@ public class WorkoutTracker {
         set.setState(ExerciseSet.STATE_CURRENT);
     }
 
+    public void undo() {
+        Exercise exercise = workout.get(exerciseNo);
+        ExerciseSet set = exercise.getSets().get(setNo);
+        set.setState(ExerciseSet.STATE_TODO);
+        position--;
+        setNo--;
+        if (setNo < 0) {
+            exerciseNo--;
+            position--;
+            if (exerciseNo < 0) {
+                exerciseNo = 0;
+                exercise = workout.get(exerciseNo);
+                setNo = 0;
+            } else {
+                exercise = workout.get(exerciseNo);
+                setNo = exercise.getSets().size() - 1;
+            }
+        }
+        set = exercise.getSets().get(setNo);
+        set.setState(ExerciseSet.STATE_CURRENT);
+    }
+
     public int getPosition() {
         return position;
     }

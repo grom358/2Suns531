@@ -164,6 +164,12 @@ public class WorkoutActivity extends AppCompatActivity {
         }
     }
 
+    public void onUndo(View view) {
+        workoutTracker.undo();
+        itemAdapter.notifyDataSetChanged();
+        init();
+    }
+
     public static void ensureVisible(ListView listView, int pos) {
         if (listView == null) {
             return;

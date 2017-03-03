@@ -57,7 +57,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/layoutSetControls"
-        android:layout_above="@+id/btnDone"
+        android:layout_above="@+id/layoutControls"
         android:orientation="horizontal">
         <ImageButton
             android:layout_width="wrap_content"
@@ -105,13 +105,27 @@
             android:onClick="onPlusWeight"/>
     </LinearLayout>
 
-    <Button
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Done"
-        android:id="@+id/btnDone"
-        android:layout_alignParentBottom="true"
-        android:textAppearance="@style/LargeButton"
-        android:onClick="onDone" />
+        android:id="@+id/layoutControls"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:src="@drawable/ic_undo"
+            android:id="@+id/btnUndo"
+            android:onClick="onUndo" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/done"
+            android:id="@+id/btnDone"
+            android:textAppearance="@style/LargeButton"
+            android:onClick="onDone" />
+    </LinearLayout>
 
 </RelativeLayout>

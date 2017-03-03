@@ -11,6 +11,8 @@
     <string name="unit">Unit</string>
     <string name="round">Round</string>
 
+    <string name="done">Done</string>
+
     <string-array name="day">
         <item>Monday</item>
         <item>Tuesday</item>
