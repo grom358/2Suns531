@@ -12,6 +12,7 @@
     <string name="round">Round</string>
 
     <string name="done">Done</string>
+    <string name="volume">Volume</string>
 
     <string-array name="day">
         <item>Monday</item>

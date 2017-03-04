@@ -34,8 +34,12 @@ public class WorkoutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_workout);
 
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        float volume = sharedPref.getInt("volume", 100) / 100f;
+
+        setContentView(R.layout.activity_workout);
         layoutSetControls = findViewById(R.id.layoutSetControls);
 
         exerciseListView = (ListView) findViewById(R.id.exerciseListView);
@@ -46,14 +50,11 @@ public class WorkoutActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         restTimer = (StopwatchTimer) findViewById(R.id.restTimer);
-        restTimer.setOnChronometerTickListener(new BellPlayer(this));
+        restTimer.setOnChronometerTickListener(new BellPlayer(this, volume));
         restNotification = WorkoutNotification.build(this, getIntent());
 
         workoutTimer = (StopwatchTimer) findViewById(R.id.workoutTimer);
         workoutTimer.start();
-
-        SharedPreferences sharedPref = getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
         List<Exercise> workout = WorkoutProgram.build(sharedPref);
         workoutTracker = new WorkoutTracker(workout);

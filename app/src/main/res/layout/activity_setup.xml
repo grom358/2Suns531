@@ -168,6 +168,22 @@
                 android:hint="weight"
                 android:selectAllOnFocus="true" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/volume"
+                android:id="@+id/lblVolume" />
+
+            <SeekBar
+                android:layout_width="200sp"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBarVolume"
+                android:layout_marginRight="10sp"
+                android:max="100"
+                android:progress="100"
+                android:padding="0dp"/>
+
         </android.support.v7.widget.GridLayout>
     </ScrollView>
 

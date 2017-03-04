@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 
 public class SetupActivity extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class SetupActivity extends AppCompatActivity {
     private Spinner spinnerDay;
     private Spinner spinnerUnit;
     private Spinner spinnerVariation;
+    private SeekBar seekBarVolume;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,8 @@ public class SetupActivity extends AppCompatActivity {
             }
         });
 
+        seekBarVolume = (SeekBar) findViewById(R.id.seekBarVolume);
+
         boolean isMetric = sharedPref.getString("unit", "kg").equals("kg");
         spinnerUnit.setSelection(isMetric ? 0 : 1);
         String roundKey = isMetric ? "kg_round" : "lb_round";
@@ -71,6 +75,7 @@ public class SetupActivity extends AppCompatActivity {
         spinnerVariation.setSelection(sharedPref.getInt("variation", WorkoutProgram.VARIATION_6DAY_SQUAT));
         editWeek.setText(Integer.toString(sharedPref.getInt("week", 1)));
         spinnerDay.setSelection(sharedPref.getInt("day_no", 0));
+        seekBarVolume.setProgress(sharedPref.getInt("volume", 100));
     }
 
     private void saveSettings() {
@@ -86,6 +91,7 @@ public class SetupActivity extends AppCompatActivity {
         editor.putFloat("squat_weight", Float.valueOf(editSquatWeight.getText().toString()));
         editor.putFloat("deadlift_weight", Float.valueOf(editDeadliftWeight.getText().toString()));
         editor.putInt("week", Integer.valueOf(editWeek.getText().toString()));
+        editor.putInt("volume", seekBarVolume.getProgress());
 
         int variation = spinnerVariation.getSelectedItemPosition();
         editor.putInt("variation", variation);

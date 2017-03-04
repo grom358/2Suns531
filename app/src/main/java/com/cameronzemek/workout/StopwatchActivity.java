@@ -1,6 +1,7 @@
 package com.cameronzemek.workout;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -22,6 +23,11 @@ public class StopwatchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        float volume = sharedPref.getInt("volume", 100) / 100f;
+
         setContentView(R.layout.activity_stopwatch);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         stopwatch = (StopwatchTimer) findViewById(R.id.stopwatch);
@@ -35,7 +41,7 @@ public class StopwatchActivity extends AppCompatActivity {
         iconReset = ContextCompat.getDrawable(ctx, R.drawable.ic_reset);
 
         // Attach bell.
-        stopwatch.setOnChronometerTickListener(new BellPlayer(this));
+        stopwatch.setOnChronometerTickListener(new BellPlayer(this, volume));
         // Create notification.
         notification = StopwatchNotification.build(this, getIntent());
     }
