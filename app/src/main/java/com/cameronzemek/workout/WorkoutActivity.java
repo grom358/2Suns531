@@ -83,7 +83,7 @@ public class WorkoutActivity extends AppCompatActivity {
         String name = workoutTracker.getExercise().getName();
         ExerciseSet set = workoutTracker.getSet();
         editReps.setText(Integer.toString(set.getReps()));
-        editWeight.setText(String.format("%.2f", set.getWeight()));
+        editWeight.setText(Util.format(set.getWeight()));
         restNotification.setText(String.format("%s: %s", name, set.getDetails()));
         if (set instanceof AssistanceSet) {
             layoutSetControls.setVisibility(View.GONE);
@@ -127,7 +127,7 @@ public class WorkoutActivity extends AppCompatActivity {
         if (weight < 0f) {
             weight = 0f;
         }
-        editWeight.setText(String.format("%.2f", weight));
+        editWeight.setText(Util.format(weight));
         hideKeyboard();
     }
 
@@ -137,7 +137,7 @@ public class WorkoutActivity extends AppCompatActivity {
         if (weight >= 1000f) {
             weight = 999.99f;
         }
-        editWeight.setText(String.format("%.2f", weight));
+        editWeight.setText(Util.format(weight));
         hideKeyboard();
     }
 
