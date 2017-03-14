@@ -6,6 +6,7 @@ public class ExerciseSet {
     public final static int STATE_FAILED = 2;
     public final static int STATE_SUCCESS = 3;
 
+    private int targetReps;
     private int reps;
     private float weight;
     private String unit;
@@ -19,13 +20,13 @@ public class ExerciseSet {
     }
 
     public ExerciseSet(int reps, float weight, String unit) {
-        this.reps = reps;
+        this.reps = this.targetReps = reps;
         this.weight = weight;
         this.unit = unit;
     }
 
     public ExerciseSet(int reps, float weight, String unit, boolean amrap) {
-        this.reps = reps;
+        this.reps = this.targetReps = reps;
         this.weight = weight;
         this.amrap = amrap;
         this.unit = unit;
@@ -44,6 +45,10 @@ public class ExerciseSet {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public int getTargetReps() {
+        return targetReps;
     }
 
     public int getReps() {

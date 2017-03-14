@@ -32,7 +32,7 @@ public class WorkoutTracker {
     public void completeSet(int reps, float weight) {
         Exercise exercise = workout.get(exerciseNo);
         ExerciseSet set = exercise.getSets().get(setNo);
-        int targetReps = set.getReps();
+        int targetReps = set.getTargetReps();
         set.setReps(reps);
         set.setWeight(weight);
         if (reps >= targetReps) {
