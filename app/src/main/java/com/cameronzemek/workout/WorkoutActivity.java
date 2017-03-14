@@ -29,7 +29,7 @@ public class WorkoutActivity extends AppCompatActivity {
     private EditText editWeight;
     private WorkoutTracker workoutTracker;
     private View layoutSetControls;
-    private final float smallestWeightIncrement = 2.5f;
+    private float smallestWeightIncrement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,11 @@ public class WorkoutActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         float volume = sharedPref.getInt("volume", 100) / 100f;
+
+        boolean isMetric = sharedPref.getString("unit", "kg").equals("kg");
+        String roundKey = isMetric ? "kg_round" : "lb_round";
+        float defaultRound = isMetric ? 2.5f : 5f;
+        smallestWeightIncrement = sharedPref.getFloat(roundKey, defaultRound);
 
         setContentView(R.layout.activity_workout);
         layoutSetControls = findViewById(R.id.layoutSetControls);
