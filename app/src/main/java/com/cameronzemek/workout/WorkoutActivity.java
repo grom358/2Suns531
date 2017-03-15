@@ -20,6 +20,7 @@ public class WorkoutActivity extends AppCompatActivity {
     public static final String KEY_DONE = "com.cameronzemek.workout.done";
 
     private BroadcastReceiver receiver;
+    private Stopwatch restStopwatch;
     private StopwatchTimer restTimer;
     private WorkoutNotification restNotification;
     private StopwatchTimer workoutTimer;
@@ -55,8 +56,9 @@ public class WorkoutActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         restTimer = (StopwatchTimer) findViewById(R.id.restTimer);
-        restTimer.setOnChronometerTickListener(new BellPlayer(this, volume));
         restNotification = WorkoutNotification.build(this, getIntent());
+        restStopwatch = new Stopwatch();
+        restStopwatch.schedule(new BellPlayer(this, volume), 60000, false);
 
         workoutTimer = (StopwatchTimer) findViewById(R.id.workoutTimer);
         workoutTimer.start();
@@ -158,7 +160,9 @@ public class WorkoutActivity extends AppCompatActivity {
 
             // Start rest timer.
             restTimer.reset();
+            restStopwatch.reset();
             restTimer.start();
+            restStopwatch.start();
             restNotification.setWhen(restTimer.getStartTime());
             restNotification.show();
 

@@ -11,7 +11,8 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 
 public class StopwatchActivity extends AppCompatActivity {
-    private StopwatchTimer stopwatch;
+    private Stopwatch stopwatch;
+    private StopwatchTimer stopwatchTimer;
     private StopwatchNotification notification;
     private ImageButton btnStartStop;
     private ImageButton btnResetPause;
@@ -30,7 +31,7 @@ public class StopwatchActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_stopwatch);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        stopwatch = (StopwatchTimer) findViewById(R.id.stopwatch);
+        stopwatchTimer = (StopwatchTimer) findViewById(R.id.stopwatch);
         btnStartStop = (ImageButton) findViewById(R.id.btnStartStop);
         btnResetPause = (ImageButton) findViewById(R.id.btnResetPause);
 
@@ -41,7 +42,8 @@ public class StopwatchActivity extends AppCompatActivity {
         iconReset = ContextCompat.getDrawable(ctx, R.drawable.ic_reset);
 
         // Attach bell.
-        stopwatch.setOnChronometerTickListener(new BellPlayer(this, volume));
+        stopwatch = new Stopwatch();
+        stopwatch.schedule(new BellPlayer(this, volume), 60000, false);
         // Create notification.
         notification = StopwatchNotification.build(this, getIntent());
     }
@@ -50,14 +52,16 @@ public class StopwatchActivity extends AppCompatActivity {
      * Callback to start/stop timer. This is the main button for this activity.
      */
     public void onStartStop(View view) {
-        if (!stopwatch.isRunning()) {
+        if (!stopwatchTimer.isRunning()) {
             stopwatch.start();
-            notification.setWhen(stopwatch.getStartTime());
+            stopwatchTimer.start();
+            notification.setWhen(stopwatchTimer.getStartTime());
             notification.show();
             btnStartStop.setImageDrawable(iconStop);
             btnResetPause.setImageDrawable(iconPause);
         } else {
             stopwatch.stop();
+            stopwatchTimer.stop();
             notification.cancel();
             btnStartStop.setImageDrawable(iconPlay);
             btnResetPause.setImageDrawable(iconReset);
@@ -69,10 +73,12 @@ public class StopwatchActivity extends AppCompatActivity {
      */
     public void onResetPause(View view) {
         notification.cancel();
-        if (!stopwatch.isRunning()) {
+        if (!stopwatchTimer.isRunning()) {
             stopwatch.reset();
+            stopwatchTimer.reset();
         } else {
             stopwatch.pause();
+            stopwatchTimer.pause();
         }
         btnStartStop.setImageDrawable(iconPlay);
         btnResetPause.setImageDrawable(iconReset);

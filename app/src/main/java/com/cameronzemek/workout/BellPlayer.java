@@ -3,10 +3,8 @@ package com.cameronzemek.workout;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.os.SystemClock;
-import android.widget.Chronometer;
 
-public class BellPlayer implements Chronometer.OnChronometerTickListener {
+public class BellPlayer implements Runnable {
     private SoundPool soundPool;
     private int soundBell;
     private float volume;
@@ -22,10 +20,7 @@ public class BellPlayer implements Chronometer.OnChronometerTickListener {
     }
 
     @Override
-    public void onChronometerTick(Chronometer chronometer) {
-        long elapsedTime = SystemClock.elapsedRealtime() - chronometer.getBase();
-        if (elapsedTime > 1000 && elapsedTime % 60000 < 1000) {
-            play();
-        }
+    public void run() {
+        play();
     }
 }
