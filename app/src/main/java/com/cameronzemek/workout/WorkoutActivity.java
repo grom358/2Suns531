@@ -209,6 +209,7 @@ public class WorkoutActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        restStopwatch.stop();
         restNotification.cancel();
         unregisterReceiver(receiver);
     }

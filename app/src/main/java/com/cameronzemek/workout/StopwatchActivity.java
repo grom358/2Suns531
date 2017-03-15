@@ -92,6 +92,7 @@ public class StopwatchActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        stopwatch.stop();
         notification.cancel();
     }
 }
