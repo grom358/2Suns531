@@ -55,7 +55,8 @@ public class StopwatchActivity extends AppCompatActivity {
         if (!stopwatchTimer.isRunning()) {
             stopwatch.start();
             stopwatchTimer.start();
-            notification.setWhen(stopwatchTimer.getStartTime());
+            // Set the notification to elapsed time in the past when resuming.
+            notification.setWhen(stopwatchTimer.getStartTime() - stopwatchTimer.getElapsedTime());
             notification.show();
             btnStartStop.setImageDrawable(iconStop);
             btnResetPause.setImageDrawable(iconPause);
