@@ -85,11 +85,11 @@ public class SetupActivity extends AppCompatActivity {
         boolean isMetric = spinnerUnit.getSelectedItemPosition() != 1;
         editor.putString("unit", isMetric ? "kg" : "lb");
         String roundKey = isMetric ? "kg_round" : "lb_round";
-        editor.putFloat(roundKey, Float.valueOf(editRound.getText().toString()));
-        editor.putFloat("press_weight", Float.valueOf(editPressWeight.getText().toString()));
-        editor.putFloat("bench_weight", Float.valueOf(editBenchWeight.getText().toString()));
-        editor.putFloat("squat_weight", Float.valueOf(editSquatWeight.getText().toString()));
-        editor.putFloat("deadlift_weight", Float.valueOf(editDeadliftWeight.getText().toString()));
+        editor.putFloat(roundKey, Util.parseFloat(editRound.getText().toString()));
+        editor.putFloat("press_weight", Util.parseFloat(editPressWeight.getText().toString()));
+        editor.putFloat("bench_weight", Util.parseFloat(editBenchWeight.getText().toString()));
+        editor.putFloat("squat_weight", Util.parseFloat(editSquatWeight.getText().toString()));
+        editor.putFloat("deadlift_weight", Util.parseFloat(editDeadliftWeight.getText().toString()));
         editor.putInt("week", Integer.valueOf(editWeek.getText().toString()));
         editor.putInt("volume", seekBarVolume.getProgress());
 

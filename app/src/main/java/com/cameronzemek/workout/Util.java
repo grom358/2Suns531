@@ -1,6 +1,7 @@
 package com.cameronzemek.workout;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 public class Util {
     public static float roundUp(float w, float p) {
@@ -19,5 +20,14 @@ public class Util {
 
     public static String format(float f) {
         return df.format(f);
+    }
+
+    public static float parseFloat(String str) {
+        char decimalSeparator = DecimalFormatSymbols.getInstance().getDecimalSeparator();
+        if (decimalSeparator != '.') {
+            str = str.replace(decimalSeparator, '.');
+        }
+        str = str.replaceAll("[^\\d\\.]", "");
+        return Float.valueOf(str);
     }
 }

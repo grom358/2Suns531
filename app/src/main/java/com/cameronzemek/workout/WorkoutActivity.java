@@ -129,7 +129,7 @@ public class WorkoutActivity extends AppCompatActivity {
     }
 
     public void onMinusWeight(View view) {
-        float w = Float.valueOf(editWeight.getText().toString());
+        float w = Util.parseFloat(editWeight.getText().toString());
         float weight = Util.roundUp(w - smallestWeightIncrement, smallestWeightIncrement);
         if (weight < 0f) {
             weight = 0f;
@@ -139,7 +139,7 @@ public class WorkoutActivity extends AppCompatActivity {
     }
 
     public void onPlusWeight(View view) {
-        float w = Float.valueOf(editWeight.getText().toString());
+        float w = Util.parseFloat(editWeight.getText().toString());
         float weight = Util.roundDown(w + smallestWeightIncrement, smallestWeightIncrement);
         if (weight >= 1000f) {
             weight = 999.99f;
@@ -151,7 +151,7 @@ public class WorkoutActivity extends AppCompatActivity {
     public void onDone(View view) {
         workoutTracker.completeSet(
                 Integer.valueOf(editReps.getText().toString()),
-                Float.valueOf(editWeight.getText().toString()));
+                Util.parseFloat(editWeight.getText().toString()));
         itemAdapter.notifyDataSetChanged();
 
         if (!workoutTracker.isDone()) {
