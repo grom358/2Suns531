@@ -11,7 +11,7 @@ public class PlateCalculator {
     public final static int[] DEFAULT_LB_PLATE_COUNTS = {0, 0, 8, 2, 2, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0};
     public final static int PLATE_LENGTH = DEFAULT_PLATE_WEIGHTS.length;
 
-    private boolean enabled = true;
+    private boolean enabled = false;
 
     private float kgBarWeight = 20f;
     private float[] kgPlateWeights = DEFAULT_PLATE_WEIGHTS;
