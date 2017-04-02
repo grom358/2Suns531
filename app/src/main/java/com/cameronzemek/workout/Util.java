@@ -31,48 +31,10 @@ public class Util {
         return Float.valueOf(str);
     }
 
-    public static String plateCalculate(float w, String unit) {
-        if (unit.equals("kg")) {
-            final float[] plates = {20f, 15f, 10f, 5f, 2.5f, 1.25f};
-            return plateCalculate(w, 20f, plates);
-        } else {
-            final float[] plates = {45f, 35f, 25f, 10f, 5f, 2.5f};
-            return plateCalculate(w, 45f, plates);
-        }
+    public static int parseInt(String str) {
+        str = str.replaceAll("[^\\d]", "");
+        return Integer.valueOf(str);
     }
 
-    public static String plateCalculate(float w, final float barWeight, final float[] plates) {
-        if (w == 0) {
-            return "";
-        }
-
-        // Weight to load each side.
-        float remaining = (w - barWeight) / 2f;
-
-        boolean first = true;
-        StringBuilder sb = new StringBuilder();
-        sb.append('[');
-        // Use largest plates possible until all weight is loaded.
-        for (float pw : plates) {
-            int plateCount = (int) (remaining / pw);
-            if (plateCount > 0) {
-                if (!first) {
-                    sb.append(", ");
-                }
-                first = false;
-                remaining -= plateCount * pw;
-                if (plateCount > 1) {
-                    sb.append(plateCount);
-                    sb.append(" x ");
-                }
-                sb.append(Util.format(pw));
-            }
-        }
-        // No plates to load.
-        if (first) {
-            return "";
-        }
-        sb.append(']');
-        return sb.toString();
-    }
+    public final static PlateCalculator plateCalculator = new PlateCalculator();
 }

@@ -10,18 +10,23 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 public class SetupActivity extends AppCompatActivity {
     private EditText editRound;
+    private EditText editBarWeight;
     private EditText editPressWeight;
     private EditText editBenchWeight;
     private EditText editSquatWeight;
     private EditText editDeadliftWeight;
     private EditText editWeek;
+    private EditText[] editPlateWeights = new EditText[PlateCalculator.PLATE_LENGTH];
+    private EditText[] editPlateCounts = new EditText[PlateCalculator.PLATE_LENGTH];
     private Spinner spinnerDay;
     private Spinner spinnerUnit;
     private Spinner spinnerVariation;
     private SeekBar seekBarVolume;
+    private Switch switchCalculator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +37,52 @@ public class SetupActivity extends AppCompatActivity {
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
         editRound = (EditText) findViewById(R.id.editRound);
+        editBarWeight = (EditText) findViewById(R.id.editBarWeight);
         editPressWeight = (EditText) findViewById(R.id.editPressWeight);
         editBenchWeight = (EditText) findViewById(R.id.editBenchWeight);
         editSquatWeight = (EditText) findViewById(R.id.editSquatWeight);
         editDeadliftWeight = (EditText) findViewById(R.id.editDeadliftWeight);
         editWeek = (EditText) findViewById(R.id.editWeek);
+        switchCalculator = (Switch) findViewById(R.id.switchCalculator);
+
+        // TODO: programmatically setup plate calculator inputs.
+        editPlateWeights[0] = (EditText) findViewById(R.id.editPlate1Weight);
+        editPlateWeights[1] = (EditText) findViewById(R.id.editPlate2Weight);
+        editPlateWeights[2] = (EditText) findViewById(R.id.editPlate3Weight);
+        editPlateWeights[3] = (EditText) findViewById(R.id.editPlate4Weight);
+        editPlateWeights[4] = (EditText) findViewById(R.id.editPlate5Weight);
+        editPlateWeights[5] = (EditText) findViewById(R.id.editPlate6Weight);
+        editPlateWeights[6] = (EditText) findViewById(R.id.editPlate7Weight);
+        editPlateWeights[7] = (EditText) findViewById(R.id.editPlate8Weight);
+        editPlateWeights[8] = (EditText) findViewById(R.id.editPlate9Weight);
+        editPlateWeights[9] = (EditText) findViewById(R.id.editPlate10Weight);
+        editPlateWeights[10] = (EditText) findViewById(R.id.editPlate11Weight);
+        editPlateWeights[11] = (EditText) findViewById(R.id.editPlate12Weight);
+        editPlateWeights[12] = (EditText) findViewById(R.id.editPlate13Weight);
+        editPlateWeights[13] = (EditText) findViewById(R.id.editPlate14Weight);
+        editPlateWeights[14] = (EditText) findViewById(R.id.editPlate15Weight);
+        editPlateWeights[15] = (EditText) findViewById(R.id.editPlate16Weight);
+        editPlateWeights[16] = (EditText) findViewById(R.id.editPlate17Weight);
+        editPlateWeights[17] = (EditText) findViewById(R.id.editPlate18Weight);
+
+        editPlateCounts[0] = (EditText) findViewById(R.id.editPlate1Count);
+        editPlateCounts[1] = (EditText) findViewById(R.id.editPlate2Count);
+        editPlateCounts[2] = (EditText) findViewById(R.id.editPlate3Count);
+        editPlateCounts[3] = (EditText) findViewById(R.id.editPlate4Count);
+        editPlateCounts[4] = (EditText) findViewById(R.id.editPlate5Count);
+        editPlateCounts[5] = (EditText) findViewById(R.id.editPlate6Count);
+        editPlateCounts[6] = (EditText) findViewById(R.id.editPlate7Count);
+        editPlateCounts[7] = (EditText) findViewById(R.id.editPlate8Count);
+        editPlateCounts[8] = (EditText) findViewById(R.id.editPlate9Count);
+        editPlateCounts[9] = (EditText) findViewById(R.id.editPlate10Count);
+        editPlateCounts[10] = (EditText) findViewById(R.id.editPlate11Count);
+        editPlateCounts[11] = (EditText) findViewById(R.id.editPlate12Count);
+        editPlateCounts[12] = (EditText) findViewById(R.id.editPlate13Count);
+        editPlateCounts[13] = (EditText) findViewById(R.id.editPlate14Count);
+        editPlateCounts[14] = (EditText) findViewById(R.id.editPlate15Count);
+        editPlateCounts[15] = (EditText) findViewById(R.id.editPlate16Count);
+        editPlateCounts[16] = (EditText) findViewById(R.id.editPlate17Count);
+        editPlateCounts[17] = (EditText) findViewById(R.id.editPlate18Count);
 
         spinnerDay = (Spinner) findViewById(R.id.spinnerDay);
         spinnerDay.setAdapter(ArrayAdapter.createFromResource(this, R.array.day, R.layout.spinner_item));
@@ -50,9 +96,7 @@ public class SetupActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 boolean isMetric = position != 1;
-                String roundKey = isMetric ? "kg_round" : "lb_round";
-                float defaultRound = isMetric ? 2.5f : 5f;
-                editRound.setText(Util.format(sharedPref.getFloat(roundKey, defaultRound)));
+                init(sharedPref, isMetric);
             }
 
             @Override
@@ -63,11 +107,10 @@ public class SetupActivity extends AppCompatActivity {
 
         seekBarVolume = (SeekBar) findViewById(R.id.seekBarVolume);
 
-        boolean isMetric = sharedPref.getString("unit", "kg").equals("kg");
+        String unit = sharedPref.getString("unit", "kg");
+        boolean isMetric = unit.equals("kg");
+        init(sharedPref, isMetric);
         spinnerUnit.setSelection(isMetric ? 0 : 1);
-        String roundKey = isMetric ? "kg_round" : "lb_round";
-        float defaultRound = isMetric ? 2.5f : 5f;
-        editRound.setText(Util.format(sharedPref.getFloat(roundKey, defaultRound)));
         editPressWeight.setText(Util.format(sharedPref.getFloat("press_weight", 100)));
         editBenchWeight.setText(Util.format(sharedPref.getFloat("bench_weight", 100)));
         editSquatWeight.setText(Util.format(sharedPref.getFloat("squat_weight", 100)));
@@ -76,6 +119,24 @@ public class SetupActivity extends AppCompatActivity {
         editWeek.setText(Integer.toString(sharedPref.getInt("week", 1)));
         spinnerDay.setSelection(sharedPref.getInt("day_no", 0));
         seekBarVolume.setProgress(sharedPref.getInt("volume", 100));
+        switchCalculator.setChecked(sharedPref.getBoolean("plate_calculator", true));
+    }
+
+    private void init(final SharedPreferences sharedPref, boolean isMetric) {
+        String unit = isMetric ? "kg" : "lb";
+        float defaultRound = isMetric ? 2.5f : 5f;
+        float defaultBarWeight = isMetric ? 20f : 45f;
+        editRound.setText(Util.format(sharedPref.getFloat(unit + "_round", defaultRound)));
+        editBarWeight.setText(Util.format(sharedPref.getFloat(unit + "_bar_weight", defaultBarWeight)));
+
+        int[] defaultPlateCounts = isMetric ? PlateCalculator.DEFAULT_KG_PLATE_COUNTS : PlateCalculator.DEFAULT_LB_PLATE_COUNTS;
+        for (int i = 0; i < PlateCalculator.PLATE_LENGTH; i++) {
+            EditText editPlateWeight = editPlateWeights[i];
+            editPlateWeight.setText(Util.format(sharedPref.getFloat(unit + "_plate_weight_" + i, PlateCalculator.DEFAULT_PLATE_WEIGHTS[i])));
+
+            EditText editPlateCount = editPlateCounts[i];
+            editPlateCount.setText(String.valueOf(sharedPref.getInt(unit + "_plate_count_" + i, defaultPlateCounts[i])));
+        }
     }
 
     private void saveSettings() {
@@ -83,15 +144,25 @@ public class SetupActivity extends AppCompatActivity {
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         boolean isMetric = spinnerUnit.getSelectedItemPosition() != 1;
-        editor.putString("unit", isMetric ? "kg" : "lb");
-        String roundKey = isMetric ? "kg_round" : "lb_round";
-        editor.putFloat(roundKey, Util.parseFloat(editRound.getText().toString()));
+        String unit = isMetric ? "kg" : "lb";
+        editor.putString("unit", unit);
+        editor.putFloat(unit + "_round", Util.parseFloat(editRound.getText().toString()));
+        editor.putFloat(unit + "_bar_weight", Util.parseFloat(editBarWeight.getText().toString()));
         editor.putFloat("press_weight", Util.parseFloat(editPressWeight.getText().toString()));
         editor.putFloat("bench_weight", Util.parseFloat(editBenchWeight.getText().toString()));
         editor.putFloat("squat_weight", Util.parseFloat(editSquatWeight.getText().toString()));
         editor.putFloat("deadlift_weight", Util.parseFloat(editDeadliftWeight.getText().toString()));
         editor.putInt("week", Integer.valueOf(editWeek.getText().toString()));
         editor.putInt("volume", seekBarVolume.getProgress());
+        editor.putBoolean("plate_calculator", switchCalculator.isChecked());
+
+        for (int i = 0; i < PlateCalculator.PLATE_LENGTH; i++) {
+            EditText editPlateWeight = editPlateWeights[i];
+            editor.putFloat(unit + "_plate_weight_" + i, Util.parseFloat(editPlateWeight.getText().toString()));
+
+            EditText editPlateCount = editPlateCounts[i];
+            editor.putInt(unit + "_plate_count_" + i, Util.parseInt(editPlateCount.getText().toString()));
+        }
 
         int variation = spinnerVariation.getSelectedItemPosition();
         editor.putInt("variation", variation);

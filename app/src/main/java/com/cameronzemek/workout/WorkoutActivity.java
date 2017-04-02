@@ -40,6 +40,8 @@ public class WorkoutActivity extends AppCompatActivity {
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         float volume = sharedPref.getInt("volume", 100) / 100f;
 
+        Util.plateCalculator.setup(sharedPref);
+
         boolean isMetric = sharedPref.getString("unit", "kg").equals("kg");
         String roundKey = isMetric ? "kg_round" : "lb_round";
         float defaultRound = isMetric ? 2.5f : 5f;

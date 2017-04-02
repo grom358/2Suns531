@@ -72,6 +72,6 @@ public class ExerciseSet {
     }
 
     public String getDetails() {
-        return String.format("%d%s x %s%s %s", reps, amrap ? "+" : "", Util.format(weight), unit, Util.plateCalculate(weight, unit));
+        return String.format("%d%s x %s%s %s", reps, amrap ? "+" : "", Util.format(weight), unit, Util.plateCalculator.calculate(weight, unit));
     }
 }

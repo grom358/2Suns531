@@ -206,6 +206,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/bar_weight"
+                android:id="@+id/lblBarWeight"
+                android:layout_marginRight="50sp"
+                grid:layout_gravity="fill_horizontal"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editBarWeight"
+                android:hint="weight"
+                android:selectAllOnFocus="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/volume"
                 android:id="@+id/lblVolume" />
 
@@ -218,6 +236,375 @@
                 android:progress="100"
                 android:padding="0dp"
                 grid:layout_gravity="fill_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/plates"
+                grid:layout_columnSpan="2"
+                style="?android:attr/listSeparatorTextViewStyle"/>
+
+            <Switch
+                android:id="@+id/switchCalculator"
+                android:layout_width="match_parent"
+                android:checked="true"
+                android:text="@string/plate_calculator"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                grid:layout_columnSpan="2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/weight" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/pairs" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate1Weight"
+                android:hint="weight"
+                android:text="100"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate1Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate2Weight"
+                android:hint="weight"
+                android:text="55"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate2Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate3Weight"
+                android:hint="weight"
+                android:text="45"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate3Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate4Weight"
+                android:hint="weight"
+                android:text="35"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate4Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate5Weight"
+                android:hint="weight"
+                android:text="25"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate5Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate6Weight"
+                android:hint="weight"
+                android:text="20"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate6Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate7Weight"
+                android:hint="weight"
+                android:text="15"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate7Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate8Weight"
+                android:hint="weight"
+                android:text="10"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate8Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate9Weight"
+                android:hint="weight"
+                android:text="7.5"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate9Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate10Weight"
+                android:hint="weight"
+                android:text="5"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate10Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate11Weight"
+                android:hint="weight"
+                android:text="2.5"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate11Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate12Weight"
+                android:hint="weight"
+                android:text="2"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate12Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate13Weight"
+                android:hint="weight"
+                android:text="1.5"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate13Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate14Weight"
+                android:hint="weight"
+                android:text="1.25"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate14Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate15Weight"
+                android:hint="weight"
+                android:text="1"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate15Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate16Weight"
+                android:hint="weight"
+                android:text="0.75"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate16Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate17Weight"
+                android:hint="weight"
+                android:text="0.5"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate17Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="6"
+                android:id="@+id/editPlate18Weight"
+                android:hint="weight"
+                android:text="0.25"
+                android:selectAllOnFocus="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="3"
+                android:id="@+id/editPlate18Count"
+                android:text="0"
+                android:selectAllOnFocus="true" />
 
         </android.support.v7.widget.GridLayout>
     </ScrollView>
