@@ -2,17 +2,23 @@
     <string name="app_name">2_Suns 5/3/1 LP</string>
     <string name="activity_history">2_Suns 5/3/1 LP: History</string>
     <string name="activity_setup">2_Suns 5/3/1 LP: Setup</string>
+
     <string name="bench">Bench</string>
     <string name="press">OHP</string>
     <string name="deadlift">Deadlift</string>
     <string name="squat">Squat</string>
 
+    <string name="day">Day</string>
     <string name="week">Week</string>
     <string name="unit">Unit</string>
     <string name="round">Round</string>
 
     <string name="done">Done</string>
     <string name="volume">Volume</string>
+
+    <string name="training_max">Training Maxes</string>
+    <string name="variation">Variation</string>
+    <string name="settings">Settings</string>
 
     <string-array name="day">
         <item>Monday</item>
