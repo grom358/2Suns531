@@ -224,7 +224,7 @@ public class WorkoutProgram {
         float squatTm = sharedPref.getFloat("squat_weight", 100);
         float deadliftTm = sharedPref.getFloat("deadlift_weight", 100);
 
-        Exercise deadlift = new Exercise("Sumo Dead");
+        Exercise deadlift = new Exercise("Deadlift");
         for (int i = 0; i < 6; i++) {
             deadlift.getSets().add(new ExerciseSet(3, Util.round(deadliftTm * 0.725f, plateRound), unit));
         }
