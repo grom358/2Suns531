@@ -30,6 +30,9 @@ public class WorkoutTracker {
     }
 
     public void completeSet(int reps, float weight) {
+        if (exerciseNo < 0 || exerciseNo >= workout.size()) {
+            return;
+        }
         Exercise exercise = workout.get(exerciseNo);
         ExerciseSet set = exercise.getSets().get(setNo);
         int targetReps = set.getTargetReps();
